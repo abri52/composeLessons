@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
      (или справа налево, в зависимости от настроек локали).
  */
 
-
 // Параметры:
 // - modifier: Modifier = Modifier – модификатор для настройки внешнего вида и поведения.
 // - horizontalArrangement: Arrangement.Horizontal = Arrangement.Start – горизонтальное расположение элементов.
