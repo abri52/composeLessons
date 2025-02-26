@@ -6,7 +6,7 @@ import androidx.compose.ui.window.application
 import tasks.task5
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication, state = WindowState(size = DpSize(1450.dp, 1597.dp))) { // 274, 424
-        tasks.task7()
+    Window(onCloseRequest = ::exitApplication, state = WindowState(size = DpSize(900.dp, 500.dp))) { // 274, 424
+        tasks.task8()
     }
 }

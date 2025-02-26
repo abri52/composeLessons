@@ -12,6 +12,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://jogamp.org/deployment/maven")
     google()
 }
 
@@ -23,6 +24,14 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation("io.coil-kt.coil3:coil-compose:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+
+    implementation("io.github.vinceglb:confettikit:0.1.0")
 }
 
 compose.desktop {
@@ -36,3 +45,4 @@ compose.desktop {
         }
     }
 }
+
