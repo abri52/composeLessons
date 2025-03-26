@@ -2,6 +2,8 @@ package tasks
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -9,6 +11,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +32,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.selects.select
 
 val size: DpSize = DpSize(375.dp, 80.dp)
 
@@ -40,6 +47,8 @@ fun task1() {
         "task1/Users.svg"
     )
 
+    var selected by remember { mutableStateOf<Int>(0) }
+
     Row(
         modifier = Modifier.size(375.dp, 80.dp).background(Color.Black),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -48,13 +57,13 @@ fun task1() {
         icons.forEach {
             if (it != "task1/Plus.svg") {
                 Box(
-                    modifier = Modifier.weight(1f).size(48.dp, 48.dp),
+                    modifier = Modifier.weight(1f).size(48.dp, 48.dp).clickable(onClick = {selected = icons.indexOf(it)}),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
                         painter = painterResource(it),
                         contentDescription = "icon",
-                        tint = Color.White,
+                        tint = if (selected != icons.indexOf(it)) Color.White else Color(179, 57, 255),
                     )
                 }
             }
@@ -64,13 +73,16 @@ fun task1() {
                         .weight(1f)
                         .size(48.dp, 48.dp)
                         .clip(androidx.compose.foundation.shape.CircleShape)
-                        .background(Color.White),
+                        .background(if (selected != icons.indexOf(it)) Color.White else Color.Transparent)
+                        .clickable(onClick = {selected = icons.indexOf(it)})
+                        .border(2.55.dp, if (selected == icons.indexOf(it)) Color.White else Color.Transparent, CircleShape)
+                    ,
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
                         painter = painterResource(it),
                         contentDescription = "icon",
-                        tint = Color.Black,
+                        tint = if (selected != icons.indexOf(it)) Color.Black else Color.White,
                     )
                 }
             }

@@ -10,6 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.border
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
@@ -18,16 +23,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
+import kotlinx.coroutines.delay
 import utils.getFormatedNumber
 
 @Composable
 fun task3() {
     class State(
         val category: String,
-        val count: Int
+        var count: Int
     )
 
-    val stats: List<State> = listOf(
+    var stats by remember { mutableStateOf<List<State>>(listOf(
         State(
             category = "Posts",
             count = 548
@@ -40,7 +46,7 @@ fun task3() {
             category = "Following",
             count = 221
         ),
-    )
+    )) }
 
     Column(
         modifier = Modifier
@@ -124,6 +130,13 @@ fun task3() {
                     )
                 }
             }
+        }
+    }
+
+    LaunchedEffect(Unit){
+        while(true){
+            delay(2000)
+            stats[(0..(stats.size - 1)).random()].count += (0..5).random()
         }
     }
 }

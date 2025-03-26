@@ -3,6 +3,7 @@ package tasks
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
@@ -11,6 +12,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -52,6 +57,8 @@ fun Modifier.bottomBorder(strokeWidth: Dp, color: Color) = composed (
 
 @Composable
 fun task2() {
+    var signedIn by remember { mutableStateOf<Boolean>(true) }
+
     Column(
         modifier = Modifier
             .size(305.dp, 88.dp)
@@ -66,23 +73,25 @@ fun task2() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 12.5.dp, vertical = 10.5.dp)
         ) {
-            Image(
-                painter = painterResource("task2/pfp.png"),
-                contentDescription = "",
-                modifier = Modifier.clip(CircleShape).size(40.dp, 40.dp)
-            )
+            if (signedIn) {
+                Image(
+                    painter = painterResource("task2/pfp.png"),
+                    contentDescription = "",
+                    modifier = Modifier.clip(CircleShape).size(40.dp, 40.dp),
+                )
+            }
             Column(
                 modifier = Modifier.size(172.dp, 46.dp).padding(start = 12.dp)
             ) {
                 Text(
-                    text = AnnotatedString("Azunyan U. Wu"),
+                    text = AnnotatedString(if (signedIn) "Azunyan U. Wu" else "Guest"),
                     modifier = Modifier.size(172.dp, 22.dp),
                     color = Color(30, 41, 59),
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font("task2/font.ttf", weight = FontWeight.W700)),
                 )
                 Text(
-                    text = AnnotatedString("Basic Member"),
+                    text = AnnotatedString(if (signedIn) "Basic Member" else "unknown"),
                     modifier = Modifier.size(172.dp, 22.dp),
                     color = Color(71, 85, 105),
                     fontSize = 14.sp,
@@ -91,7 +100,7 @@ fun task2() {
             }
             Spacer(Modifier.weight(1f))
             Box(
-                modifier = Modifier.weight(1f).size(40.dp, 40.dp),
+                modifier = Modifier.weight(1f).size(40.dp, 40.dp).clickable(onClick = {signedIn = false}),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(

@@ -2,12 +2,17 @@ package tasks
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +31,9 @@ import java.lang.module.ModuleFinder
 
 @Composable
 fun task4() {
+    var comments by remember { mutableStateOf<Int>(16) }
+    var pins by remember { mutableStateOf<Int>(4) }
+
     Column(
         modifier = Modifier
             .size(352.dp, 405.dp)
@@ -116,7 +124,7 @@ fun task4() {
             Spacer(Modifier.weight(1f))
 
             Row(
-                modifier = Modifier.size(33.dp, 13.dp),
+                modifier = Modifier.size(33.dp, 13.dp).clickable(onClick = {comments++}),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
@@ -126,7 +134,7 @@ fun task4() {
                     modifier = Modifier.size(13.dp, 13.dp)
                 )
                 Text(
-                    text = AnnotatedString("16"),
+                    text = AnnotatedString(comments.toString()),
                     modifier = Modifier.fillMaxHeight().width(20.dp),
                     color = Color(144, 164, 174),
                     fontSize = 12.sp,
@@ -138,7 +146,7 @@ fun task4() {
             Spacer(Modifier.width(17.dp))
 
             Row(
-                modifier = Modifier.size(26.dp, 13.dp),
+                modifier = Modifier.size(26.dp, 13.dp).clickable(onClick = {pins++}),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
@@ -148,7 +156,7 @@ fun task4() {
                     modifier = Modifier.size(13.dp, 13.dp)
                 )
                 Text(
-                    text = AnnotatedString("4"),
+                    text = AnnotatedString(pins.toString()),
                     modifier = Modifier.fillMaxHeight().width(13.dp),
                     color = Color(144, 164, 174),
                     fontSize = 12.sp,
