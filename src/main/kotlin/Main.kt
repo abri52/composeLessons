@@ -8,6 +8,6 @@ import androidx.compose.ui.window.application
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication, state = WindowState(placement = WindowPlacement.Maximized)) { // 274, 424
-        tasks.task5()
+        tasks.uniqueTask2()
     }
 }

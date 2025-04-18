@@ -31,6 +31,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
     implementation("io.github.vinceglb:confettikit:0.1.0")
+
+    implementation("org.jsoup:jsoup:1.19.1")
+
+    implementation("com.github.skydoves:orbital:0.4.0")
 }
 
 compose.desktop {
@@ -44,4 +48,3 @@ compose.desktop {
         }
     }
 }
-
